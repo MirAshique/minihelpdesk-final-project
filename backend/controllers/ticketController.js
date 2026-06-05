@@ -3,7 +3,15 @@ const Ticket = require("../models/Ticket");
 // GET /api/tickets
 const getTickets = async (req, res) => {
   try {
-    const tickets = await Ticket.find().sort({ createdAt: -1 });
+    const { activeOnly } = req.query;
+
+    let filter = {};
+
+    if (activeOnly === "true") {
+      filter.status = { $ne: "Closed" };
+    }
+
+    const tickets = await Ticket.find(filter).sort({ createdAt: -1 });
 
     res.status(200).json({
       success: true,
@@ -17,7 +25,6 @@ const getTickets = async (req, res) => {
     });
   }
 };
-
 // POST /api/tickets
 const createTicket = async (req, res) => {
   try {
