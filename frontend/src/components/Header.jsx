@@ -1,17 +1,22 @@
 function Header() {
   return (
     <header className="header">
-      <h1>MiniHelpDesk</h1>
+      <div className="header-content">
+        <span className="logo">🎫</span>
 
-      <p>
-        Smart Support Ticket Management System
-      </p>
+        <h1>MiniHelpDesk</h1>
 
-      <div style={{ marginTop: "15px" }}>
-        <span>Developed By </span>
-        <strong>Mir Ashique Hussain Talpur</strong>
-        <span> & </span>
-        <strong>Afaque Ahmed</strong>
+        <p>
+          Track, manage and resolve support tickets efficiently.
+        </p>
+
+        <p>
+          Developed by Mir Ashique Hussain Talpur & Afaque Ahmed
+        </p>
+
+        <div className="status-badge">
+          System Online
+        </div>
       </div>
     </header>
   );

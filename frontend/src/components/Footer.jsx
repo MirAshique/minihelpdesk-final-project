@@ -1,24 +1,16 @@
 function Footer() {
   return (
     <footer className="footer">
-      <h3>MiniHelpDesk</h3>
-
       <p>
-        Support Ticket Management System
-      </p>
-
-      <br />
-
-      <p>
-        Developed By Mir Ashique Hussain Talpur & Afaque Ahmed
+        MiniHelpDesk Ticket Management System
       </p>
 
       <p>
-        SZABIST BSCS 6B
+        Developed by Mir Ashique Hussain Talpur & Afaque Ahmed
       </p>
 
       <p>
-        © 2026 All Rights Reserved
+        SZABIST BSCS Final Project 2026
       </p>
     </footer>
   );

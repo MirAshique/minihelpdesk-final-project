@@ -316,3 +316,33 @@ body {
     font-size: 32px;
   }
 }
+.logo {
+  font-size: 55px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.status-badge {
+  display: inline-block;
+  margin-top: 15px;
+  background: rgba(255,255,255,0.15);
+  color: white;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.status-badge::before {
+  content: "● ";
+  color: #22c55e;
+}
+.welcome-card {
+  margin-bottom: 25px;
+}
+
+.welcome-card p {
+  color: #64748b;
+  line-height: 1.7;
+  margin-top: 10px;
+}
