@@ -1,8 +1,25 @@
 function Footer() {
   return (
     <footer className="footer">
-      <p>Developed by Mir Ashique Hussain Talpur & Afaque Ahmed</p>
-      <p>BSCS 6B | Web Technologies Final Project</p>
+      <h3>MiniHelpDesk</h3>
+
+      <p>
+        Support Ticket Management System
+      </p>
+
+      <br />
+
+      <p>
+        Developed By Mir Ashique Hussain Talpur & Afaque Ahmed
+      </p>
+
+      <p>
+        SZABIST BSCS 6B
+      </p>
+
+      <p>
+        © 2026 All Rights Reserved
+      </p>
     </footer>
   );
 }
