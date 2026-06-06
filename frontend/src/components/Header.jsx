@@ -1,4 +1,9 @@
 function Header() {
+  const handleLogout = () => {
+    localStorage.removeItem("isLoggedIn");
+    window.location.reload();
+  };
+
   return (
     <header className="header">
       <div className="header-content">
@@ -17,6 +22,14 @@ function Header() {
         <div className="status-badge">
           System Online
         </div>
+
+        <button
+          className="btn"
+          onClick={handleLogout}
+          style={{ marginTop: "15px" }}
+        >
+          Logout
+        </button>
       </div>
     </header>
   );
