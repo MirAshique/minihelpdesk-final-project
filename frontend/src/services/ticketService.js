@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/tickets";
+const API_URL = "https://minihelpdesk-backend-jdu5.onrender.com/api/tickets";
 
 // Get all tickets or only active tickets
 export const getTickets = async (activeOnly = false) => {
