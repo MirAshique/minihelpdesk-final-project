@@ -1,4 +1,40 @@
-function TicketList() {
+import { useState } from "react";
+
+function TicketList({ tickets, loading, onDeleteTicket }) {
+  const [search, setSearch] = useState("");
+
+  const filteredTickets = tickets.filter(
+    (ticket) =>
+      ticket.subject.toLowerCase().includes(search.toLowerCase()) ||
+      ticket.description.toLowerCase().includes(search.toLowerCase())
+  );
+
+  const getPriorityClass = (priority) => {
+    switch (priority?.toLowerCase()) {
+      case "high":
+        return "high";
+      case "medium":
+        return "medium";
+      case "low":
+        return "low";
+      default:
+        return "low";
+    }
+  };
+
+  const getStatusClass = (status) => {
+    switch (status?.toLowerCase()) {
+      case "open":
+        return "open";
+      case "in progress":
+        return "progress";
+      case "closed":
+        return "closed";
+      default:
+        return "open";
+    }
+  };
+
   return (
     <section className="card">
       <div className="ticket-header">
@@ -14,82 +50,56 @@ function TicketList() {
             type="text"
             placeholder="Search tickets..."
             className="search-input"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
-
-          <label className="checkbox-label">
-            <input type="checkbox" />
-            Active Only
-          </label>
         </div>
       </div>
 
-      {/* Ticket 1 */}
-      <div className="ticket-card">
-        <div className="ticket-top">
-          <div>
-            <h3>Printer Not Working</h3>
-            <p>
-              Printer in Lab 1 is currently offline and students are unable
-              to print documents.
-            </p>
+      {loading ? (
+        <p>Loading tickets...</p>
+      ) : filteredTickets.length === 0 ? (
+        <p>No tickets found.</p>
+      ) : (
+        filteredTickets.map((ticket) => (
+          <div className="ticket-card" key={ticket._id}>
+            <div className="ticket-top">
+              <div>
+                <h3>{ticket.subject}</h3>
 
-            <div className="badges">
-              <span className="badge high">High Priority</span>
-              <span className="badge open">Open</span>
+                <p>{ticket.description}</p>
+
+                <div className="badges">
+                  <span
+                    className={`badge ${getPriorityClass(
+                      ticket.priority
+                    )}`}
+                  >
+                    {ticket.priority} Priority
+                  </span>
+
+                  <span
+                    className={`badge ${getStatusClass(
+                      ticket.status
+                    )}`}
+                  >
+                    {ticket.status}
+                  </span>
+                </div>
+              </div>
+
+              <div className="ticket-buttons">
+                <button
+                  className="delete-btn"
+                  onClick={() => onDeleteTicket(ticket._id)}
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           </div>
-
-          <div className="ticket-buttons">
-            <button className="edit-btn">Edit</button>
-            <button className="delete-btn">Delete</button>
-          </div>
-        </div>
-      </div>
-
-      {/* Ticket 2 */}
-      <div className="ticket-card">
-        <div className="ticket-top">
-          <div>
-            <h3>Internet Issue</h3>
-            <p>
-              Internet speed is very slow in Lab 2 causing delays during
-              practical sessions.
-            </p>
-
-            <div className="badges">
-              <span className="badge medium">Medium Priority</span>
-              <span className="badge progress">In Progress</span>
-            </div>
-          </div>
-
-          <div className="ticket-buttons">
-            <button className="edit-btn">Edit</button>
-            <button className="delete-btn">Delete</button>
-          </div>
-        </div>
-      </div>
-
-      {/* Ticket 3 */}
-      <div className="ticket-card">
-        <div className="ticket-top">
-          <div>
-            <h3>Software Installation</h3>
-            <p>
-              Install Visual Studio Code and Node.js in Lab 3 systems.
-            </p>
-
-            <div className="badges">
-              <span className="badge low">Low Priority</span>
-              <span className="badge closed">Closed</span>
-            </div>
-          </div>
-
-          <div className="ticket-buttons">
-            <button className="edit-btn">Edit</button>
-            <button className="delete-btn">Delete</button>
-          </div>
-        </div>
-      </div>
+        ))
+      )}
     </section>
   );
 }
