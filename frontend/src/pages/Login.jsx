@@ -17,19 +17,37 @@ function Login({ onLogin }) {
   };
 
   return (
-    <div className="container">
-      <section className="card" style={{ maxWidth: "500px", margin: "50px auto" }}>
-        <h2>Login</h2>
+    <div className="login-page">
+      <section className="login-card">
+        <div className="login-icon">🎫</div>
 
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        <h1 className="app-title">MiniHelpDesk</h1>
+
+        <p className="login-subtitle">
+          Ticket Management System
+        </p>
+
+        <div className="demo-box">
+          <strong>Demo Credentials</strong>
+          <br />
+          Username: 123
+          <br />
+          Password: 123
+        </div>
+
+        {error && <p className="login-error">{error}</p>}
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Username</label>
             <input
               type="text"
+              placeholder="Enter username"
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => {
+                setUsername(e.target.value);
+                setError("");
+              }}
             />
           </div>
 
@@ -37,15 +55,25 @@ function Login({ onLogin }) {
             <label>Password</label>
             <input
               type="password"
+              placeholder="Enter password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                setError("");
+              }}
             />
           </div>
 
-          <button className="btn" type="submit">
+          <button className="btn login-btn" type="submit">
             Login
           </button>
         </form>
+
+        <p className="login-footer">
+          Web Technologies I Final Project
+          <br />
+          Developed by Mir Ashique Hussain Talpur & Afaque Ahmed
+        </p>
       </section>
     </div>
   );

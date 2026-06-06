@@ -276,46 +276,6 @@ body {
   border-top: 1px solid #dbe3ef;
 }
 
-@media (max-width: 900px) {
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .dashboard-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .ticket-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .ticket-actions {
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .search-input {
-    width: 100%;
-  }
-}
-
-@media (max-width: 600px) {
-  .stats-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .form-row,
-  .ticket-top {
-    grid-template-columns: 1fr;
-    flex-direction: column;
-  }
-
-  .header h1 {
-    font-size: 32px;
-  }
-}
 .logo {
   font-size: 55px;
   display: block;
@@ -325,7 +285,7 @@ body {
 .status-badge {
   display: inline-block;
   margin-top: 15px;
-  background: rgba(255,255,255,0.15);
+  background: rgba(255, 255, 255, 0.15);
   color: white;
   padding: 8px 18px;
   border-radius: 999px;
@@ -337,6 +297,7 @@ body {
   content: "● ";
   color: #22c55e;
 }
+
 .welcome-card {
   margin-bottom: 25px;
 }
@@ -346,6 +307,8 @@ body {
   line-height: 1.7;
   margin-top: 10px;
 }
+
+/* Delete Modal */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -430,8 +393,308 @@ body {
     transform: scale(0.92);
     opacity: 0;
   }
+
   to {
     transform: scale(1);
     opacity: 1;
+  }
+}
+
+/* Login Page */
+.login-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #dbeafe, #f8fafc);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 450px;
+  background: white;
+  border-radius: 24px;
+  padding: 38px;
+  text-align: center;
+  box-shadow: 0 25px 60px rgba(15, 23, 42, 0.18);
+  border: 1px solid #e5e7eb;
+}
+
+.login-icon {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+.app-title {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 10px 0;
+  line-height: 1.1;
+}
+
+.login-subtitle {
+  font-size: 1rem;
+  color: #64748b;
+  margin-bottom: 24px;
+}
+
+.demo-box {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1d4ed8;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  margin-bottom: 22px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.login-error {
+  background: #fee2e2;
+  color: #b91c1c;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.login-card .form-group {
+  text-align: left;
+}
+
+.login-card .form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.login-card .form-group input {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  font-size: 15px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.login-card .form-group input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+.login-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 16px;
+}
+
+.login-footer {
+  margin-top: 25px;
+  font-size: 12px;
+  color: #94a3b8;
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ticket-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ticket-actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row,
+  .ticket-top {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+  }
+
+  .header h1 {
+    font-size: 32px;
+  }
+
+  .login-card {
+    padding: 25px;
+  }
+
+  .app-title {
+    font-size: 2rem;
+  }
+
+  .login-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .demo-box {
+    font-size: 13px;
+  }
+}
+.welcome-card {
+  margin-bottom: 25px;
+  padding: 22px 28px;
+}
+
+.welcome-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.welcome-card h2 {
+  margin-bottom: 8px;
+  color: #0f172a;
+}
+
+.welcome-card p {
+  color: #64748b;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.welcome-badge {
+  background: #dbeafe;
+  color: #1d4ed8;
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.ticket-meta {
+  display: flex;
+  gap: 15px;
+  margin: 10px 0;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.brand h1 {
+  margin: 0;
+}
+
+.brand p {
+  margin: 0;
+  color: #dbeafe;
+}
+
+.logout-btn {
+  border: none;
+  background: white;
+  color: #1d4ed8;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background: #f1f5f9;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.stat-icon {
+  font-size: 28px;
+}
+
+.stat-total {
+  border-left: 4px solid #f59e0b;
+}
+
+.stat-open {
+  border-left: 4px solid #22c55e;
+}
+
+.stat-progress {
+  border-left: 4px solid #a855f7;
+}
+
+.stat-closed {
+  border-left: 4px solid #64748b;
+}
+
+.active-filter {
+  background: #f8fafc;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+}
+
+.empty-message {
+  text-align: center;
+  padding: 30px;
+  color: #64748b;
+}
+
+.error-message {
+  background: #fee2e2;
+  color: #b91c1c;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .welcome-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-top {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .ticket-meta {
+    flex-direction: column;
+    gap: 5px;
   }
 }

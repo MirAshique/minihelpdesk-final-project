@@ -1,6 +1,12 @@
 import { useState } from "react";
 
-function TicketList({ tickets, loading, onDeleteTicket }) {
+function TicketList({
+  tickets,
+  loading,
+  activeOnly,
+  onActiveOnlyChange,
+  onDeleteTicket,
+}) {
   const [search, setSearch] = useState("");
   const [ticketToDelete, setTicketToDelete] = useState(null);
 
@@ -36,6 +42,16 @@ function TicketList({ tickets, loading, onDeleteTicket }) {
     }
   };
 
+  const formatDate = (date) => {
+    if (!date) return "N/A";
+
+    return new Date(date).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+  };
+
   const confirmDelete = () => {
     if (ticketToDelete) {
       onDeleteTicket(ticketToDelete._id);
@@ -47,7 +63,7 @@ function TicketList({ tickets, loading, onDeleteTicket }) {
     <section className="card">
       <div className="ticket-header">
         <div>
-          <h2>Support Tickets</h2>
+          <h2>📋 Support Tickets ({filteredTickets.length})</h2>
           <p className="ticket-subtitle">
             Manage and monitor all support requests
           </p>
@@ -61,13 +77,24 @@ function TicketList({ tickets, loading, onDeleteTicket }) {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
+
+          <label className="checkbox-label active-filter">
+            <input
+              type="checkbox"
+              checked={activeOnly}
+              onChange={(e) => onActiveOnlyChange(e.target.checked)}
+            />
+            Active Only
+          </label>
         </div>
       </div>
 
       {loading ? (
-        <p>Loading tickets...</p>
+        <p className="empty-message">Loading tickets...</p>
       ) : filteredTickets.length === 0 ? (
-        <p>No tickets found.</p>
+        <p className="empty-message">
+          No tickets found. Create your first ticket.
+        </p>
       ) : (
         filteredTickets.map((ticket) => (
           <div className="ticket-card" key={ticket._id}>
@@ -75,6 +102,11 @@ function TicketList({ tickets, loading, onDeleteTicket }) {
               <div>
                 <h3>{ticket.subject}</h3>
                 <p>{ticket.description}</p>
+
+                <div className="ticket-meta">
+                  <span>🆔 {ticket._id?.slice(-6)}</span>
+                  <span>📅 {formatDate(ticket.createdAt)}</span>
+                </div>
 
                 <div className="badges">
                   <span className={`badge ${getPriorityClass(ticket.priority)}`}>
@@ -92,7 +124,7 @@ function TicketList({ tickets, loading, onDeleteTicket }) {
                   className="delete-btn"
                   onClick={() => setTicketToDelete(ticket)}
                 >
-                  Delete
+                  🗑 Delete
                 </button>
               </div>
             </div>
@@ -112,9 +144,7 @@ function TicketList({ tickets, loading, onDeleteTicket }) {
               <strong>{ticketToDelete.subject}</strong>?
             </p>
 
-            <p className="modal-warning">
-              This action cannot be undone.
-            </p>
+            <p className="modal-warning">This action cannot be undone.</p>
 
             <div className="modal-actions">
               <button
@@ -124,10 +154,7 @@ function TicketList({ tickets, loading, onDeleteTicket }) {
                 Cancel
               </button>
 
-              <button
-                className="confirm-delete-btn"
-                onClick={confirmDelete}
-              >
+              <button className="confirm-delete-btn" onClick={confirmDelete}>
                 Yes, Delete
               </button>
             </div>

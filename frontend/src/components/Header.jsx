@@ -6,10 +6,23 @@ function Header() {
 
   return (
     <header className="header">
-      <div className="header-content">
-        <span className="logo">🎫</span>
+      <div className="header-top">
+        <div className="brand">
+          <span className="logo">🎫</span>
 
-        <h1>MiniHelpDesk</h1>
+          <div>
+            <h1>MiniHelpDesk</h1>
+            <p>Ticket Management System</p>
+          </div>
+        </div>
+
+        <button className="logout-btn" onClick={handleLogout}>
+          Logout
+        </button>
+      </div>
+
+      <div className="header-content">
+        <h2>Ticket Management Dashboard</h2>
 
         <p>
           Track, manage and resolve support tickets efficiently.
@@ -22,14 +35,6 @@ function Header() {
         <div className="status-badge">
           System Online
         </div>
-
-        <button
-          className="btn"
-          onClick={handleLogout}
-          style={{ marginTop: "15px" }}
-        >
-          Logout
-        </button>
       </div>
     </header>
   );

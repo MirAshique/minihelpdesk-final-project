@@ -1,12 +1,19 @@
 function WelcomeCard() {
   return (
     <div className="card welcome-card">
-      <h2>Welcome to MiniHelpDesk</h2>
+      <div className="welcome-content">
+        <div>
+          <h2>👋 Welcome to MiniHelpDesk</h2>
+          <p>
+            Manage support tickets, track issues, and improve response times
+            from a centralized dashboard.
+          </p>
+        </div>
 
-      <p>
-        A centralized platform for managing support tickets,
-        tracking issues and improving response times.
-      </p>
+        <div className="welcome-badge">
+          🎫 Ticket Management
+        </div>
+      </div>
     </div>
   );
 }

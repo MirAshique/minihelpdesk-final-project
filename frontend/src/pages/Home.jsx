@@ -91,17 +91,6 @@ function Home() {
       <div className="container">
         <StatsCards stats={stats} />
 
-        <div className="filter-row">
-          <label>
-            <input
-              type="checkbox"
-              checked={activeOnly}
-              onChange={(e) => setActiveOnly(e.target.checked)}
-            />
-            {" "}Active Only
-          </label>
-        </div>
-
         {error && <p className="error-message">{error}</p>}
 
         <main className="dashboard-grid">
@@ -110,6 +99,8 @@ function Home() {
           <TicketList
             tickets={tickets}
             loading={loading}
+            activeOnly={activeOnly}
+            onActiveOnlyChange={setActiveOnly}
             onDeleteTicket={handleDeleteTicket}
           />
         </main>
