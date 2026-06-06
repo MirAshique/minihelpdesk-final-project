@@ -344,4 +344,4 @@ This project is developed for educational and academic purposes only.
 
 ## ⭐ Acknowledgment
 
-Special thanks to our instructor and SZABIST Sukkur for providing the opportunity to build and deploy a full-stack web application using modern web technologies.
+Special thanks to our instructor and SZABIST Larkana Campus for providing the opportunity to build and deploy a full-stack web application using modern web technologies.
