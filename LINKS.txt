@@ -1,0 +1,14 @@
+MiniHelpDesk Final Project
+
+GitHub Repository:
+https://github.com/MirAshique/minihelpdesk-final-project
+
+Frontend (Live Demo):
+https://minihelpdesk-frontend.onrender.com
+
+Backend API:
+https://minihelpdesk-backend-jdu5.onrender.com
+
+Developed By:
+Mir Ashique Hussain Talpur (2312155)
+Afaque Ahmed
