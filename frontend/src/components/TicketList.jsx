@@ -5,6 +5,7 @@ function TicketList({
   loading,
   activeOnly,
   onActiveOnlyChange,
+  onEditTicket,
   onDeleteTicket,
 }) {
   const [search, setSearch] = useState("");
@@ -120,6 +121,13 @@ function TicketList({
               </div>
 
               <div className="ticket-buttons">
+                <button
+                  className="edit-btn"
+                  onClick={() => onEditTicket(ticket)}
+                >
+                  ✏️ Edit
+                </button>
+
                 <button
                   className="delete-btn"
                   onClick={() => setTicketToDelete(ticket)}

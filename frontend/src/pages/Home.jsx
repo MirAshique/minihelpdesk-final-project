@@ -10,6 +10,7 @@ import WelcomeCard from "../components/WelcomeCard";
 import {
   getTickets,
   createTicket,
+  updateTicket,
   deleteTicket,
   getTicketStats,
 } from "../services/ticketService";
@@ -18,6 +19,7 @@ function Home() {
   const [tickets, setTickets] = useState([]);
   const [stats, setStats] = useState(null);
   const [activeOnly, setActiveOnly] = useState(false);
+  const [editingTicket, setEditingTicket] = useState(null);
 
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -69,11 +71,34 @@ function Home() {
     }
   };
 
+  const handleUpdateTicket = async (id, ticketData) => {
+    try {
+      setSaving(true);
+      setError("");
+
+      await updateTicket(id, ticketData);
+
+      setEditingTicket(null);
+
+      await fetchTickets();
+      await fetchStats();
+    } catch (err) {
+      setError("Failed to update ticket. Please try again.");
+      console.error(err);
+    } finally {
+      setSaving(false);
+    }
+  };
+
   const handleDeleteTicket = async (id) => {
     try {
       setError("");
 
       await deleteTicket(id);
+
+      if (editingTicket?._id === id) {
+        setEditingTicket(null);
+      }
 
       await fetchTickets();
       await fetchStats();
@@ -81,6 +106,15 @@ function Home() {
       setError("Failed to delete ticket. Please try again.");
       console.error(err);
     }
+  };
+
+  const handleEditTicket = (ticket) => {
+    setEditingTicket(ticket);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleCancelEdit = () => {
+    setEditingTicket(null);
   };
 
   return (
@@ -94,13 +128,20 @@ function Home() {
         {error && <p className="error-message">{error}</p>}
 
         <main className="dashboard-grid">
-          <TicketForm onCreateTicket={handleCreateTicket} saving={saving} />
+          <TicketForm
+            onCreateTicket={handleCreateTicket}
+            onUpdateTicket={handleUpdateTicket}
+            editingTicket={editingTicket}
+            onCancelEdit={handleCancelEdit}
+            saving={saving}
+          />
 
           <TicketList
             tickets={tickets}
             loading={loading}
             activeOnly={activeOnly}
             onActiveOnlyChange={setActiveOnly}
+            onEditTicket={handleEditTicket}
             onDeleteTicket={handleDeleteTicket}
           />
         </main>

@@ -18,6 +18,13 @@ export const createTicket = async (ticketData) => {
   return response.data.data;
 };
 
+// Update existing ticket
+export const updateTicket = async (id, ticketData) => {
+  const response = await axios.put(`${API_URL}/${id}`, ticketData);
+
+  return response.data.data;
+};
+
 // Delete ticket
 export const deleteTicket = async (id) => {
   const response = await axios.delete(`${API_URL}/${id}`);

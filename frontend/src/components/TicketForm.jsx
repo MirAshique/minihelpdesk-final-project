@@ -1,12 +1,38 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-function TicketForm({ onCreateTicket, saving }) {
+function TicketForm({
+  onCreateTicket,
+  onUpdateTicket,
+  editingTicket,
+  onCancelEdit,
+  saving,
+}) {
   const [formData, setFormData] = useState({
     subject: "",
     description: "",
     priority: "Low",
     status: "Open",
   });
+
+  useEffect(() => {
+    if (editingTicket) {
+      setFormData({
+        subject: editingTicket.subject || "",
+        description: editingTicket.description || "",
+        priority: editingTicket.priority || "Low",
+        status: editingTicket.status || "Open",
+      });
+    }
+  }, [editingTicket]);
+
+  const resetForm = () => {
+    setFormData({
+      subject: "",
+      description: "",
+      priority: "Low",
+      status: "Open",
+    });
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,19 +51,23 @@ function TicketForm({ onCreateTicket, saving }) {
       return;
     }
 
-    await onCreateTicket(formData);
+    if (editingTicket) {
+      await onUpdateTicket(editingTicket._id, formData);
+    } else {
+      await onCreateTicket(formData);
+    }
 
-    setFormData({
-      subject: "",
-      description: "",
-      priority: "Low",
-      status: "Open",
-    });
+    resetForm();
+  };
+
+  const handleCancel = () => {
+    resetForm();
+    onCancelEdit();
   };
 
   return (
     <section className="card">
-      <h2>Create New Ticket</h2>
+      <h2>{editingTicket ? "✏️ Edit Ticket" : "➕ Create New Ticket"}</h2>
 
       <form onSubmit={handleSubmit}>
         <div className="form-group">
@@ -94,8 +124,23 @@ function TicketForm({ onCreateTicket, saving }) {
         </div>
 
         <button className="btn" type="submit" disabled={saving}>
-          {saving ? "Saving..." : "Add Ticket"}
+          {saving
+            ? "Saving..."
+            : editingTicket
+            ? "Update Ticket"
+            : "Add Ticket"}
         </button>
+
+        {editingTicket && (
+          <button
+            className="cancel-edit-btn"
+            type="button"
+            onClick={handleCancel}
+            disabled={saving}
+          >
+            Cancel Edit
+          </button>
+        )}
       </form>
     </section>
   );
