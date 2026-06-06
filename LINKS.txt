@@ -10,5 +10,5 @@ Backend API:
 https://minihelpdesk-backend-jdu5.onrender.com
 
 Developed By:
-Mir Ashique Hussain Talpur (2312155)
+Mir Ashique Hussain Talpur
 Afaque Ahmed
