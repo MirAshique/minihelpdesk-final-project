@@ -2,6 +2,7 @@ import { useState } from "react";
 
 function TicketList({ tickets, loading, onDeleteTicket }) {
   const [search, setSearch] = useState("");
+  const [ticketToDelete, setTicketToDelete] = useState(null);
 
   const filteredTickets = tickets.filter(
     (ticket) =>
@@ -32,6 +33,13 @@ function TicketList({ tickets, loading, onDeleteTicket }) {
         return "closed";
       default:
         return "open";
+    }
+  };
+
+  const confirmDelete = () => {
+    if (ticketToDelete) {
+      onDeleteTicket(ticketToDelete._id);
+      setTicketToDelete(null);
     }
   };
 
@@ -66,23 +74,14 @@ function TicketList({ tickets, loading, onDeleteTicket }) {
             <div className="ticket-top">
               <div>
                 <h3>{ticket.subject}</h3>
-
                 <p>{ticket.description}</p>
 
                 <div className="badges">
-                  <span
-                    className={`badge ${getPriorityClass(
-                      ticket.priority
-                    )}`}
-                  >
+                  <span className={`badge ${getPriorityClass(ticket.priority)}`}>
                     {ticket.priority} Priority
                   </span>
 
-                  <span
-                    className={`badge ${getStatusClass(
-                      ticket.status
-                    )}`}
-                  >
+                  <span className={`badge ${getStatusClass(ticket.status)}`}>
                     {ticket.status}
                   </span>
                 </div>
@@ -91,7 +90,7 @@ function TicketList({ tickets, loading, onDeleteTicket }) {
               <div className="ticket-buttons">
                 <button
                   className="delete-btn"
-                  onClick={() => onDeleteTicket(ticket._id)}
+                  onClick={() => setTicketToDelete(ticket)}
                 >
                   Delete
                 </button>
@@ -99,6 +98,41 @@ function TicketList({ tickets, loading, onDeleteTicket }) {
             </div>
           </div>
         ))
+      )}
+
+      {ticketToDelete && (
+        <div className="modal-overlay">
+          <div className="delete-modal">
+            <div className="modal-icon">⚠️</div>
+
+            <h2>Delete Ticket?</h2>
+
+            <p>
+              Are you sure you want to delete{" "}
+              <strong>{ticketToDelete.subject}</strong>?
+            </p>
+
+            <p className="modal-warning">
+              This action cannot be undone.
+            </p>
+
+            <div className="modal-actions">
+              <button
+                className="cancel-modal-btn"
+                onClick={() => setTicketToDelete(null)}
+              >
+                Cancel
+              </button>
+
+              <button
+                className="confirm-delete-btn"
+                onClick={confirmDelete}
+              >
+                Yes, Delete
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </section>
   );
