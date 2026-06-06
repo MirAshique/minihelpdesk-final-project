@@ -2,17 +2,32 @@ import axios from "axios";
 
 const API_URL = "http://localhost:5000/api/tickets";
 
-export const getTickets = async () => {
-  const response = await axios.get(API_URL);
+// Get all tickets or only active tickets
+export const getTickets = async (activeOnly = false) => {
+  const response = await axios.get(
+    `${API_URL}?activeOnly=${activeOnly}`
+  );
+
   return response.data.data;
 };
 
+// Create new ticket
 export const createTicket = async (ticketData) => {
   const response = await axios.post(API_URL, ticketData);
+
+  return response.data.data;
+};
+
+// Delete ticket
+export const deleteTicket = async (id) => {
+  const response = await axios.delete(`${API_URL}/${id}`);
+
   return response.data;
 };
 
-export const deleteTicket = async (id) => {
-  const response = await axios.delete(`${API_URL}/${id}`);
-  return response.data;
+// Get dashboard statistics
+export const getTicketStats = async () => {
+  const response = await axios.get(`${API_URL}/stats`);
+
+  return response.data.data;
 };
