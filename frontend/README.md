@@ -34,7 +34,7 @@ https://github.com/MirAshique/minihelpdesk-final-project
 
 ### University
 
-SZABIST Sukkur
+SZABIST Larkana Campus
 
 ### Course
 
@@ -332,7 +332,7 @@ minihelpdesk-final-project
 
 ## 🎓 Academic Project
 
-This project was developed as the **Final Project for Web Technologies I** at **SZABIST Sukkur**.
+This project was developed as the **Final Project for Web Technologies I** at **SZABIST Larkana Campus**.
 
 ---
 
